@@ -1,3 +1,4 @@
+import datetime
 import os
 
 
@@ -6,7 +7,6 @@ from googleapiclient.discovery import build
 API_KEY = os.getenv('API_KEY')
 
 class Video:
-
     def __init__(self, video_id: str):
         self.video_id = video_id
         self.title = self._get_title()
@@ -44,6 +44,9 @@ class Video:
         return int(response['items'][0]['statistics'][data_type])
 
 
+
+
+
 class PLVideo(Video):
     def __init__(self, video_id, id_playlist):
         super().__init__(video_id)
@@ -56,6 +59,10 @@ class PLVideo(Video):
 
     def __str__(self):
         return f'{self.title}'
+
+
+
+
 
 
 
