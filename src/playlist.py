@@ -81,4 +81,3 @@ class PlayList:
     def show_best_video(self):
         return f'https://youtu.be/{self._get_best_video().video_id}'
 
-
