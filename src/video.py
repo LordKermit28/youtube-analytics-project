@@ -40,6 +40,7 @@ class Video:
 class PLVideo(Video):
     def __init__(self, video_id, id_playlist):
         super().__init__(video_id)
+        self.id_playlist = id_playlist
 
 
     def __str__(self):
