@@ -12,29 +12,35 @@ class Video:
         self.title = self._get_title()
         self.link = f"https://www.youtube.com/watch?v={video_id}"
         self.views_count = self._get_video_info('viewCount')
-        self.likes_count = self._get_video_info('likeCount')
+        self.like_count = self._get_video_info('likeCount')
 
     def __str__(self):
         return self.title
 
     def _get_title(self):
-        youtube = build('youtube', 'v3', developerKey=API_KEY)
-        request = youtube.videos().list(
-            part='snippet',
-            id=self.video_id
-        )
-        response = request.execute()
-        return response['items'][0]['snippet']['title']
+        try:
+            youtube = build('youtube', 'v3', developerKey=API_KEY)
+            request = youtube.videos().list(
+                part='snippet',
+                id=self.video_id
+            )
+            response = request.execute()
+            return response['items'][0]['snippet']['title']
+        except Exception:
+            return None
+
 
     def _get_video_info(self, data_type: str):
-        youtube = build('youtube', 'v3', developerKey=API_KEY)
-        request = youtube.videos().list(
-            part='statistics',
-            id=self.video_id
-        )
-        response = request.execute()
-        return int(response['items'][0]['statistics'][data_type])
-
+        try:
+            youtube = build('youtube', 'v3', developerKey=API_KEY)
+            request = youtube.videos().list(
+                part='statistics',
+                id=self.video_id
+            )
+            response = request.execute()
+            return int(response['items'][0]['statistics'][data_type])
+        except Exception:
+            return None
 
 
 class PLVideo(Video):
