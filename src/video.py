@@ -26,7 +26,7 @@ class Video:
             )
             response = request.execute()
             return response['items'][0]['snippet']['title']
-        except Exception:
+        except IndexError:
             return None
 
 
@@ -39,7 +39,7 @@ class Video:
             )
             response = request.execute()
             return int(response['items'][0]['statistics'][data_type])
-        except Exception:
+        except IndexError:
             return None
 
 
